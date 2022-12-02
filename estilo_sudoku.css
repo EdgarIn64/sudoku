@@ -1,0 +1,33 @@
+body {
+	text-align: center;
+	min-width: 582px;
+}
+
+#tablero input {
+	width: 64px;
+	height: 64px;
+	font-size: 30px;
+	text-align: center;
+	margin: -2px;
+}
+
+table {
+	border-collapse: collapse;
+	border: 2px solid blue;
+}
+
+td {
+	border-right: 3px solid blue;
+	
+}
+
+tr#fila_c, tr#fila_f {
+	border-bottom: 3px solid blue;
+}
+
+button#btn_comprobar {
+	font-size: 30px;
+	text-align: center;
+	cursor: pointer;
+}
+
