@@ -12,9 +12,10 @@ var numI;
 var mal = false;
 var abc = "abcdefghi".split("");
 var error = "";
-
+var valor = "";
 
 function comprobar() {
+	
 	evaluarFila();
 
 	if (!mal) {
@@ -28,12 +29,12 @@ function comprobar() {
 
 function evaluarFila() {
 	var fila = "";
-	var valor = "";
 
 	for(i=0; i<abc.length; i++) {
 		for(j=1; j<10; j++) {
 			valor = document.getElementById(abc[i]+j).value;
-			if (fila.includes(valor) || valor=="") {
+			
+			if (fila.includes(valor) || valor=="" || valor<1 || valor>9) {
 				error = abc[i]+j;
 				j=10;
 				i=10;
@@ -48,13 +49,12 @@ function evaluarFila() {
 
 function evaluarColumna() {
 	var columna = "";
-	var valor = "";
 
 	for(i=1; i<abc.length; i++) {
 		for(j=0; j<9; j++) {
 			valor = document.getElementById(abc[j]+i).value;
 			if (columna.includes(valor) || valor=="") {
-				error = abc[i]+j;
+				error = abc[j]+i;
 				j=10;
 				i=10;
 				mal = true;
@@ -68,7 +68,6 @@ function evaluarColumna() {
 
 function evaluarBloque() {
 	var fila = "";
-	var valor = "";
 	var pot_fila = 0;
 	var pot_columna = 0;
 
@@ -77,7 +76,7 @@ function evaluarBloque() {
 			for(j=1; j<4; j++) {
 				valor = document.getElementById(abc[i+pot_fila]+(j+pot_columna)).value;
 				if (fila.includes(valor) || valor == "") {
-					error = abc[i]+j;
+					error = abc[i+pot_fila]+(j+pot_columna);
 					j=10;
 					i=10;
 					mal = true;
@@ -102,16 +101,14 @@ function setTablero() {
 		elemento = document.getElementById("fila_"+abc[i]);
 		for(j=1; j<10; j += 3) {
 			elemento.innerHTML += "<td>\n"
-				+ "<input type='text' maxlength='1' id='"+abc[i]+(j)+"' required='true'></input>\n"
-				+ "<input type='text' maxlength='1' id='"+abc[i]+(j+1)+"' required='true'></input>\n"
-				+ "<input type='text' maxlength='1' id='"+abc[i]+(j+2)+"' required='true'></input>\n"
+				+ "<input type='number' id='"+abc[i]+(j)+"' min='1' max='9' required='true'></input>\n"
+				+ "<input type='number' id='"+abc[i]+(j+1)+"' min='1' max='9' required='true'></input>\n"
+				+ "<input type='number' id='"+abc[i]+(j+2)+"' min='1' max='9' required='true'></input>\n"
 				+ "</td>";
 		}
-//	<input type='text' maxlength='1' id='"+abc[i]+(j+2)+"' required='true'>
 	}
 
-	var opcion = 1;
- 
+	var opcion = Math.floor(Math.random() * 4);
 	switch (opcion) {
 		case 1: tablero_b();
 		break;
@@ -124,12 +121,18 @@ function setTablero() {
 
 
 	var lista = [numA, numB, numC, numD, numE, numF, numG, numH, numI];
+	var listaNumeros = "123456789".split("");
+	var random;
 
 	for(i=0; i<lista.length; i++) {
+		random = Math.floor(Math.random() * (8-i));
 		for(j=0; j<lista[i].length; j++) {
-			document.getElementById(lista[i][j]).value = (i+1);
+			
+			document.getElementById(lista[i][j]).value = listaNumeros[random];
 			document.getElementById(lista[i][j]).disabled = true;
-		}
+			
+		}	
+		listaNumeros.splice(random, 1);
 	}
 }
 
@@ -146,6 +149,18 @@ function tablero_a() {
 }
 
 function tablero_b() {
+	numA = ["d5", "e2", "h3"];
+	numB = ["b7", "f8"];
+	numC = ["a1", "b4", "c7", "d2", "e8", "f6", "g3", "h9", "i5"];
+	numD = ["a3", "c8"];
+	numE = ["b8", "c5", "f4", "g6", "i7"];
+	numF = ["c1", "g8", "h6", "i3"];
+	numG = ["b6", "c3", "d4", "e7", "f1", "i2"];
+	numH = ["a9", "d8", "e1", "g7", "h2", "i4"];
+	numI = ["b2", "e9"];
+}
+
+function tablero_c() {
 	numA = ["a7", "b5", "c3", "e8", "g2", "i9"];
 	numB = ["a8", "b6", "c2", "d4", "e7", "f3"];
 	numC = [];
@@ -157,32 +172,27 @@ function tablero_b() {
 	numI = ["a4", "b1", "c7", "e2", "g3", "h6"];
 }
 
-function tablero_c() {
-	numA = ["", "", "", ""];
-	numB = ["", "", "", ""];
-	numC = ["", "", "", ""];
-	numD = ["", "", "", ""];
-	numE = ["", "", "", ""];
-	numF = ["", "", "", ""];
-	numG = ["", "", "", ""];
-	numH = ["", "", "", ""];
-	numI = ["", "", "", ""];
-}
-
 function tablero_d() {
-	numA = ["", "", "", ""];
-	numB = ["", "", "", ""];
-	numC = ["", "", "", ""];
-	numD = ["", "", "", ""];
-	numE = ["", "", "", ""];
-	numF = ["", "", "", ""];
-	numG = ["", "", "", ""];
-	numH = ["", "", "", ""];
-	numI = ["", "", "", ""];
+	numA = ["a1", "c7", "d2", "e4", "g3", "h6", "i8"];
+	numB = ["a3", "b6", "c8", "d5", "f1", "h2", "i9"];
+	numC = ["a5", "b2", "d3", "e8", "f4", "g1", "h7"];
+	numD = ["a9", "c1", "d7", "f2", "g5", "i3"];
+	numE = ["f6", "h4"];
+	numF = ["g9", "i5"];
+	numG = ["a7", "e5", "g2"];
+	numH = ["d6", "e3", "f7"];
+	numI = ["a4", "c3", "d9", "g6"];
 }
 
 function perdiste() {
-	alert("MAL");
+	errorSudoku = document.getElementById(error);
+	setTimeout(() => {
+		(errorSudoku.disabled) ? 
+			errorSudoku.style.background = "#b7daf4":
+			errorSudoku.style.background = "none";
+	}, 1000);
+	errorSudoku.style.background = "#ff9d9d";
+	
 	mal = false;
 }
 
@@ -190,6 +200,7 @@ function perdiste() {
 function ganaste() {
 	alert("FELICIDADES, GANASTE");
 }
+
 
 
 

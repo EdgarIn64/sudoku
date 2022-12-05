@@ -8,17 +8,25 @@ body {
 	height: 64px;
 	font-size: 30px;
 	text-align: center;
-	margin: -2px;
+	margin-right: -2px;
+	margin-left: -2px;
+	margin-top: -1px;
+	margin-bottom: -1px;
+	padding-left: 17px;
+}
+
+#tablero input:disabled {
+	background-color: #b7daf4;
+	color: black;
 }
 
 table {
 	border-collapse: collapse;
-	border: 2px solid blue;
+	border: 3px solid blue;
 }
 
 td {
-	border-right: 3px solid blue;
-	
+	border-right: 5px solid blue;	
 }
 
 tr#fila_c, tr#fila_f {
@@ -30,4 +38,3 @@ button#btn_comprobar {
 	text-align: center;
 	cursor: pointer;
 }
-
